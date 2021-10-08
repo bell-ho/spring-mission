@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,8 +9,6 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Modify</h1>
-<h2>수정화면</h2>
-<a href="/">Home</a>
+
 </body>
 </html>

@@ -11,6 +11,6 @@
 <body>
 <h1>List</h1>
 <h2>목록화면</h2>
-<a href="/home">Home</a>
+<a href="/">Home</a>
 </body>
 </html>

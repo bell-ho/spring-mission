@@ -2,9 +2,7 @@ package com.spring.mvc.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @Controller
@@ -16,24 +14,39 @@ public class BoardController {
 
     }
 
-    @GetMapping("/register")
-    public void registerForm() {
-
+    @GetMapping("/get?register")
+    public String registerForm() {
+        System.out.println("gg");
+        return "/board/register";
     }
 
-    @GetMapping("/modify")
-    public void modifyForm() {
-
+    @PostMapping("/post?register")
+    public String register() {
+        return "/board/list";
     }
 
-    @GetMapping("/read{no}")
-    public String read(@PathVariable("no") int no) {
-        log.info(no);
-        return "read";
+    @GetMapping("/get?modify")
+    public String modifyForm() {
+        return "/board/modify";
     }
 
-    @GetMapping("/read2/{no}")
-    public void read2(@PathVariable("no") int boardNo) {
+    @PostMapping("/post?modify")
+    public String modify() {
+        return "/board/list";
+    }
 
+    @GetMapping("/get?remove")
+    public String removeForm() {
+        return "/board/remove";
+    }
+
+    @PostMapping("/post?remove")
+    public String remove() {
+        return "/board/list";
+    }
+
+    @GetMapping("/get?read")
+    public String read(int boardNo) {
+        return "/board/read";
     }
 }
