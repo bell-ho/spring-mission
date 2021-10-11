@@ -9,47 +9,26 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Spring mission 005</h1>
-<table>
-    <thead>
-    <tr>
-        <th>no</th>
-        <th>url</th>
-        <th>title</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>
-            <form action="/board/get?register" method="get">
-                <input type="submit" value="/board/get?register">
-            </form>
-        </td>
-        <td>등록</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td><a href="/board/get?modify">/board/get?modify</a></td>
-        <td>수정</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td><a href="/board/get?list">/board/get?list</a></td>
-        <td>목록</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td><a href="/board/get?read">/board/get?read</a></td>
-        <td>읽기</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td><a href="/board/get?remove">/board/get?remove</a></td>
-        <td>삭제</td>
-    </tr>
-    </tbody>
-</table>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<h1>Spring mission 006</h1>
+
+<button type="button" id="Btn">전송</button>
+
+<script>
+
+    $(document).on("click", "#Btn", function () {
+        $.ajax(
+            {
+                type: "get",
+                headers: {
+                    'Accept': 'application/json',
+                    // 'Content-Type': 'application/xml; charset=utf-8'
+                },
+                url: "/board/5"
+            }
+        )
+    });
+</script>
 
 </body>
 </html>
