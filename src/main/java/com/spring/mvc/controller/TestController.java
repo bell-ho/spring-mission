@@ -6,9 +6,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -51,17 +51,17 @@ public class TestController {
     @ResponseBody
     public Member test0301() {
 
-        return new Member("test", "123456");
+        return new Member("test", "123456", new Date());
     }
 
     @GetMapping(value = "/test04", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Member> test04() {
         List<Member> list = new ArrayList<>();
-        list.add(new Member("test1", "1"));
-        list.add(new Member("test2", "1"));
-        list.add(new Member("test3", "1"));
-        list.add(new Member("test4", "1"));
+//        list.add(new Member("test1", "1", 5));
+//        list.add(new Member("test1", "1", 5));
+//        list.add(new Member("test1", "1", 5));
+//        list.add(new Member("test1", "1", 5));
 
         return list;
     }
@@ -71,9 +71,9 @@ public class TestController {
     public Map<String, Member> test05() {
         Map<String, Member> memberMap = new HashMap<>();
 
-        memberMap.put("key1", new Member("test01", "1"));
-        memberMap.put("key2", new Member("test02", "1"));
-        memberMap.put("key3", new Member("test03", "1"));
+//        memberMap.put("key1", new Member("test01", "1", 5));
+//        memberMap.put("key1", new Member("test01", "1", 5));
+//        memberMap.put("key1", new Member("test01", "1", 5));
 
         return memberMap;
     }
@@ -95,7 +95,7 @@ public class TestController {
     @ResponseBody
     public ResponseEntity<Member> test08() {
 
-        Member m = new Member("test1", "1");
+        Member m = new Member("test1", "1", new Date());
         return new ResponseEntity<Member>(m, HttpStatus.OK);
     }
 
@@ -104,10 +104,10 @@ public class TestController {
     public ResponseEntity<List<Member>> test09() {
 
         List<Member> list = new ArrayList<>();
-        list.add(new Member("test1", "1"));
-        list.add(new Member("test2", "1"));
-        list.add(new Member("test3", "1"));
-        list.add(new Member("test4", "1"));
+//        list.add(new Member("test1", "1", 5));
+//        list.add(new Member("test1", "1", 5));
+//        list.add(new Member("test1", "1", 5));
+//        list.add(new Member("test1", "1", 5));
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
@@ -118,9 +118,9 @@ public class TestController {
 
         Map<String, Member> memberMap = new HashMap<>();
 
-        memberMap.put("key1", new Member("test01", "1"));
-        memberMap.put("key2", new Member("test02", "1"));
-        memberMap.put("key3", new Member("test03", "1"));
+//        memberMap.put("key1", new Member("test01", "1", 5));
+//        memberMap.put("key1", new Member("test01", "1", 5));
+//        memberMap.put("key1", new Member("test01", "1", 5));
 
         return new ResponseEntity<>(memberMap, HttpStatus.OK);
     }
@@ -162,14 +162,36 @@ public class TestController {
     }
 
     @GetMapping("/register/{userId}")
-    public String register2(String userId) {
+    public String register2(@PathVariable("userId") String userId) {
         log.info(userId);
         return "/success";
     }
 
-    @PostMapping("/register01")
-    public String register01(String userId) {
+    @GetMapping("/register01")
+    public String register01(String userId, Date dateOfBirth) {
+        log.info("userId : "+userId);
+        log.info("dataOfBirth : "+dateOfBirth);
+        return "success";
+    }
+
+    @GetMapping("/register02")
+    public String register02(Member member) {
+        log.info(member.toString());
+        return "success";
+    }
+
+    @PostMapping("/register03")
+    public String register03(int uid, Member member) {
+        log.info(member.toString());
+        log.info(uid);
+        return "success";
+    }
+
+    @PostMapping("/register04")
+    public String register04(String userId, String password, int coin) {
         log.info(userId);
+        log.info(password);
+        log.info(coin);
         return "success";
     }
 }

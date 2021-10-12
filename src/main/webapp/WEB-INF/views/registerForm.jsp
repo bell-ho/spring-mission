@@ -10,12 +10,12 @@
 </head>
 <body>
 <h1>registerForm</h1>
-<a href="/register?userId=test&password=123456">버튼</a>
-<a href="/register/test">버튼2</a>
 
-<form action="/register01" , method="post">
+
+<form action="/register02" , method="get">
     <input type="hidden" name="userId" value="test">
     <input type="hidden" name="password" value="12345">
+    <input type="hidden" name="dateOfBirth" value="221024">
     <button type="submit">전송</button>
 </form>
 
