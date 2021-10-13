@@ -10,19 +10,23 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<h1>registerForm</h1>
+<h1>등록</h1>
 
 
 <form action="/register" , method="post">
-    <input type="text" name="userId" value="test">
-    <input type="text" name="password" value="12345">
-    <button type="submit">/register 전송</button>
+    유저 ID : <input type="text" name="userId" value="test"><br>
+    패스워드 : <input type="text" name="password" value="12345"><br>
+    이름 : <input type="text" name="userName" value="abc"><br>
+    Email : <input type="text" name="email" value="abc@abc.com"><br>
+
+    성별 <br>
+    <input type="radio" name="gender" value="male"> male
+    <input type="radio" name="gender" value="Female"> Female
+    <br>
+
+    <button type="submit">전송</button>
 </form>
 
-<form action="/register" method="post">
-    <input type="text" name="userId" value="userId">
-    <input type="text" name="password" value="password">
-    <button type="submit">전송post</button>
-</form>
+
 </body>
 </html>

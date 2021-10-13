@@ -2,6 +2,7 @@ package com.spring.mvc.controller;
 
 import com.spring.mvc.domain.Member;
 import com.spring.mvc.domain.Member2;
+import com.spring.mvc.domain.Member3;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -159,6 +162,19 @@ public class TestController {
         return "/registerForm";
     }
 
+    @PostMapping("/userInsert")
+    public String userInsert(Member3 member3, Model model) {
+        log.info(member3.toString());
+        model.addAttribute("member", member3);
+        return "success";
+    }
+
+    @GetMapping("/registerForm01")
+    public String registerForm01(Model model) {
+        model.addAttribute("member", new Member3());
+        return "registerForm";
+    }
+
     @GetMapping("/register")
     public String register(
             @ModelAttribute("userId") String userId
@@ -176,18 +192,11 @@ public class TestController {
     }
 
     @PostMapping("/register")
-    public String registerpost(Member2 m, Model model) {
-
-        m.setUserId("test");
-        m.setPassword("123");
-        m.setUserName("abc");
-        m.setEmail("aaaa");
-
-        model.addAttribute("member", m);
-
+    public String registerpost(@Validated Member3 m, Model model, BindingResult result) {
         log.info(m.toString());
+        log.info(result);
 
-        return "result";
+        return "success";
     }
 
     @GetMapping("/result")

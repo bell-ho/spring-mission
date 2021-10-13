@@ -10,5 +10,9 @@
 </head>
 <body>
 <h1>success</h1>
+${member.userId}<br>
+${member.password}<br>
+${member.email}<br>
+${member.gender}<br>
 </body>
 </html>
