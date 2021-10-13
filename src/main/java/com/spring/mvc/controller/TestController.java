@@ -1,16 +1,19 @@
 package com.spring.mvc.controller;
 
 import com.spring.mvc.domain.Member;
+import com.spring.mvc.domain.Member2;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -51,7 +54,8 @@ public class TestController {
     @ResponseBody
     public Member test0301() {
 
-        return new Member("test", "123456", new Date());
+//        return new Member("test", "123456", new Date());
+        return null;
     }
 
     @GetMapping(value = "/test04", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -95,8 +99,9 @@ public class TestController {
     @ResponseBody
     public ResponseEntity<Member> test08() {
 
-        Member m = new Member("test1", "1", new Date());
-        return new ResponseEntity<Member>(m, HttpStatus.OK);
+//        Member m = new Member("test1", "1", new Date());
+//        return new ResponseEntity<Member>(m, HttpStatus.OK);
+        return null;
     }
 
     @GetMapping(value = "/test09", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -155,22 +160,46 @@ public class TestController {
     }
 
     @GetMapping("/register")
-    public String register(String userId, String password) {
-        log.info(userId + " :" + password);
+    public String register(
+            @ModelAttribute("userId") String userId
+            , @ModelAttribute("password") String password
+            , @ModelAttribute("userName") String userName
+            , @ModelAttribute("email") String email
+            , Model model) {
 
-        return "/success";
+        log.info(userId + " :" + password);
+        model.addAttribute("userId", "test");
+        model.addAttribute("password", "");
+        model.addAttribute("userName", "userName");
+        model.addAttribute("email", "email");
+        return "/result";
     }
 
-    @GetMapping("/register/{userId}")
-    public String register2(@PathVariable("userId") String userId) {
-        log.info(userId);
-        return "/success";
+    @PostMapping("/register")
+    public String registerpost(Member2 m, Model model) {
+
+        m.setUserId("test");
+        m.setPassword("123");
+        m.setUserName("abc");
+        m.setEmail("aaaa");
+
+        model.addAttribute("member", m);
+
+        log.info(m.toString());
+
+        return "result";
+    }
+
+    @GetMapping("/result")
+    public String result(Model model) {
+        model.addAttribute("msg", "success");
+        return "result";
     }
 
     @GetMapping("/register01")
     public String register01(String userId, Date dateOfBirth) {
-        log.info("userId : "+userId);
-        log.info("dataOfBirth : "+dateOfBirth);
+        log.info("userId : " + userId);
+        log.info("dataOfBirth : " + dateOfBirth);
         return "success";
     }
 
@@ -193,5 +222,49 @@ public class TestController {
         log.info(password);
         log.info(coin);
         return "success";
+    }
+
+    @GetMapping("/registerAllForm")
+    public String registerAllForm() {
+        return "registerAllForm";
+    }
+
+    @PostMapping("/registerUser")
+    public String registerUser(Member member) {
+        log.info(member.toString());
+        return "success";
+    }
+
+    @PostMapping("/registerFile01")
+    public String registerFile01(MultipartFile picture) {
+        log.info("oriName : " + picture.getOriginalFilename());
+        return "success";
+    }
+
+    @PostMapping("/uploadAjax")
+    public ResponseEntity<String> uploadAjax(MultipartFile picture) {
+        log.info(picture.getOriginalFilename());
+        return new ResponseEntity<String>("UploadOK : " + picture.getOriginalFilename(), HttpStatus.OK);
+    }
+
+    @GetMapping("/read01")
+    public String read01(Model model) {
+        model.addAttribute("userId", "test");
+        model.addAttribute("password", "123");
+        model.addAttribute("userName", "userName");
+        model.addAttribute("email", "email");
+        return "read01";
+    }
+
+    @GetMapping("/read02")
+    public String read02(Model model) {
+        Member2 m = new Member2();
+        m.setUserId("test");
+        m.setPassword("123");
+        m.setUserName("abc");
+        m.setEmail("aaaa");
+
+        model.addAttribute("member", m);
+        return "read02";
     }
 }

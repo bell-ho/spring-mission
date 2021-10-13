@@ -9,15 +9,20 @@
     <title>RegisterForm</title>
 </head>
 <body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <h1>registerForm</h1>
 
 
-<form action="/register02" , method="get">
-    <input type="hidden" name="userId" value="test">
-    <input type="hidden" name="password" value="12345">
-    <input type="hidden" name="dateOfBirth" value="221024">
-    <button type="submit">전송</button>
+<form action="/register" , method="post">
+    <input type="text" name="userId" value="test">
+    <input type="text" name="password" value="12345">
+    <button type="submit">/register 전송</button>
 </form>
 
+<form action="/register" method="post">
+    <input type="text" name="userId" value="userId">
+    <input type="text" name="password" value="password">
+    <button type="submit">전송post</button>
+</form>
 </body>
 </html>

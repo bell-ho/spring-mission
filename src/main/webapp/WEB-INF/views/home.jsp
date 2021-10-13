@@ -10,9 +10,9 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<h1>Spring mission 006</h1>
+<h1>Spring</h1>
 
-<button type="button" id="Btn">전송</button>
+<p>Server Time : ${serverTime}</p>
 
 <script>
 
