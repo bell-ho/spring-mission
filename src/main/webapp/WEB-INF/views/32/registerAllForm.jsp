@@ -6,13 +6,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>success</title>
+    <title>Document</title>
 </head>
 <body>
-<h1>success</h1>
-${member.userId}<br>
-${member.password}<br>
-${member.email}<br>
-${member.gender}<br>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<h1>Register Form</h1>
+
+<form action="/32/register" method="post">
+    <input type="text" name="userId" value="ho">
+    <input type="text" name="password" value="password">
+    <button type="submit">전송</button>
+</form>
+<br>
+
+<script>
+
+</script>
 </body>
 </html>

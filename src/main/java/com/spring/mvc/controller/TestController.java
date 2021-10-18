@@ -330,7 +330,7 @@ public class TestController {
     }
 
     @PostMapping("/27/register02")
-    public ResponseEntity<String> register27m2(String userId , String password) {
+    public ResponseEntity<String> register27m2(String userId, String password) {
         log.info("27 : " + userId);
         log.info("27 : " + password);
         return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
@@ -376,35 +376,51 @@ public class TestController {
         return "/31/registerAllForm";
     }
 
-    ///진행중 137
-
-    @PostMapping("/userInsert")
-    public String userInsert(Member3 member3, Model model) {
-        log.info(member3.toString());
-        model.addAttribute("member", member3);
-        return "success";
+    @GetMapping("/31/register")
+    public String register31(@ModelAttribute("userId") String userId, @ModelAttribute("password") String password, @ModelAttribute String userName, @ModelAttribute String email) {
+        // @ModelAttribute("이름") 전달 받은 파라미터를 model.attribute() 까지 해줌
+        log.info(userId);
+        log.info(password);
+        log.info(userName);
+        log.info(email);
+        return "/31/result";
     }
 
-    @GetMapping("/registerForm01")
-    public String registerForm01(Model model) {
-        model.addAttribute("member", new Member3());
-        return "registerForm";
+    @GetMapping("/31/register31m3")
+    public String register31m3(@ModelAttribute("member") Member22 member22) {
+        log.info(member22.toString());
+        return "/31/result";
     }
 
-    @GetMapping("/register")
-    public String register(
-            @ModelAttribute("userId") String userId
-            , @ModelAttribute("password") String password
-            , @ModelAttribute("userName") String userName
-            , @ModelAttribute("email") String email
-            , Model model) {
+    // 32
+    @GetMapping("/32/registerAllForm")
+    public String registerAllForm32() {
+        return "/32/registerAllForm";
+    }
 
-        log.info(userId + " :" + password);
-        model.addAttribute("userId", "test");
-        model.addAttribute("password", "");
-        model.addAttribute("userName", "userName");
-        model.addAttribute("email", "email");
-        return "/result";
+    @GetMapping("/32/result")
+    public String result32m2(Model model) {
+        model.addAttribute("msg", "SUCCESS");
+        return "/32/result";
+    }
+
+    @GetMapping("/32/register")
+    public String result32m3() {
+        return "/32/result";
+    }
+
+    // 33
+    @GetMapping("/33/registerForm01")
+    public String registerForm01m1(Model model) {
+        model.addAttribute("member", new Member33("userId","pass","un"));
+        return "/33/registerForm";
+    }
+
+    @PostMapping("/33/register")
+    public String registerForm01m2(@Validated @ModelAttribute("member") Member33 member33 , BindingResult result) {
+        log.info(member33.toString());
+        log.info(result);
+        return "/33/success";
     }
 
     @PostMapping("/register")
@@ -417,29 +433,4 @@ public class TestController {
 
         return "success";
     }
-
-    @GetMapping("/result")
-    public String result(Model model) {
-        model.addAttribute("msg", "success");
-        return "result";
-    }
-
-
-    @PostMapping("/register03")
-    public String register03(int uid, Member member) {
-        log.info(member.toString());
-        log.info(uid);
-        return "success";
-    }
-
-    @PostMapping("/register04")
-    public String register04(String userId, String password, int coin) {
-        log.info(userId);
-        log.info(password);
-        log.info(coin);
-        return "success";
-    }
-
-
-
 }

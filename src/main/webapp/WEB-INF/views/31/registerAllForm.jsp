@@ -13,12 +13,19 @@
 
 <h1>Register Form</h1>
 
-<form action="/31/register" method="post">
-    <input type="text" name="userId" value="userId">
+<form action="/31/register" method="get">
+    <input type="text" name="userId" value="ho">
     <input type="text" name="password" value="password">
     <button type="submit">전송</button>
 </form>
+<br>
 
+<form action="/31/register31m3" method="get">
+    <input type="text" name="userId" value="userId">
+    <input type="text" name="password" value="password">
+    <input type="text" name="coin" value="05">
+    <button type="submit">전송</button>
+</form>
 <script>
 
 </script>

@@ -13,12 +13,12 @@
 <h1>등록</h1>
 
 
-<form action="/register" , method="post">
-    유저 ID : <input type="text" name="userId" value=""><br>
-    패스워드 : <input type="text" name="password" value="12345"><br>
-    이름 : <input type="text" name="userName" value="abc"><br>
-    Email : <input type="text" name="email" value="abc@abc.com"><br>
-    birthDay : <input type="text" name="birthDay" value="220602"><br>
+<form action="/33/register" method="post" modelattribute="member">
+    유저 ID : <input type="text" name="userId" value="${member.userId}"><br>
+    패스워드 : <input type="text" name="password" value="${member.password}"><br>
+    이름 : <input type="text" name="username" value="${member.username}"><br>
+    Email : <input type="text" name="email" value=""><br>
+    birthDay : <input type="text" name="birthDay" value=""><br>
 
     성별 <br>
     <input type="radio" name="gender" value="male"> male
