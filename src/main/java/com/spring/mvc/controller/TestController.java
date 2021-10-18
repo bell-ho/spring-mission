@@ -1,9 +1,6 @@
 package com.spring.mvc.controller;
 
-import com.spring.mvc.domain.Member;
-import com.spring.mvc.domain.Member11;
-import com.spring.mvc.domain.Member22;
-import com.spring.mvc.domain.Member3;
+import com.spring.mvc.domain.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -282,7 +280,103 @@ public class TestController {
         log.info("dataOfBirth : " + dateOfBirth);
         return "success";
     }
-    /////////////////////////////////////////////////////////////// 여기까지
+
+    // 24
+    @GetMapping("/24/register")
+    public String register24() {
+        return "/24/registerForm";
+    }
+
+    @GetMapping("/24/register02")
+    public String register02(Member24 member) {
+        log.info(member.toString());
+        return "success";
+    }
+
+    // 25
+    @GetMapping("/25/registerAllForm")
+    public String registerAllForm() {
+        return "/25/registerAllForm";
+    }
+
+    @PostMapping("/25/registerUser")
+    public String registerUser(Member member) {
+        log.info(member.toString());
+        return "success";
+    }
+
+    // 26
+    @GetMapping("/26/registerAllForm")
+    public String registerAllForm26() {
+        return "/26/registerAllForm";
+    }
+
+    @PostMapping("/26/registerFile01")
+    public String registerFile01(MultipartFile picture) {
+        log.info("oriName : " + picture.getOriginalFilename());
+        return "success";
+    }
+
+    // 27
+    @GetMapping("/27/registerAllForm")
+    public String registerAllForm27() {
+        return "/27/registerAllForm";
+    }
+
+    @GetMapping("/27/register01/{userId}")
+    public ResponseEntity<String> register27(@PathVariable("userId") String userId) {
+        log.info("27 : " + userId);
+        return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    }
+
+    @PostMapping("/27/register02")
+    public ResponseEntity<String> register27m2(String userId , String password) {
+        log.info("27 : " + userId);
+        log.info("27 : " + password);
+        return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    }
+
+    // 28
+    @GetMapping("/28/registerAllForm")
+    public String registerAllForm28() {
+        return "/28/registerAllForm";
+    }
+
+    @PostMapping("/28/uploadAjax")
+    public ResponseEntity<String> uploadAjax(MultipartFile picture) {
+        log.info(picture.getOriginalFilename());
+        return new ResponseEntity<String>("UploadOK : " + picture.getOriginalFilename(), HttpStatus.OK);
+    }
+
+    // 30
+    @GetMapping("/30/read01")
+    public String read01(Model model) {
+        model.addAttribute("userId", "test");
+        model.addAttribute("password", "123");
+        model.addAttribute("userName", "userName");
+        model.addAttribute("email", "email");
+        return "/30/read01";
+    }
+
+    @GetMapping("/30/read02")
+    public String read02(Model model) {
+        Member30 m = new Member30();
+        m.setUserId("test");
+        m.setPassword("123");
+        m.setUsername("name");
+        m.setEmail("email");
+
+        model.addAttribute("member", m);
+        return "/30/read02";
+    }
+
+    // 31
+    @GetMapping("/31/registerAllForm")
+    public String registerAllForm31() {
+        return "/31/registerAllForm";
+    }
+
+    ///진행중 137
 
     @PostMapping("/userInsert")
     public String userInsert(Member3 member3, Model model) {
@@ -314,9 +408,12 @@ public class TestController {
     }
 
     @PostMapping("/register")
-    public String registerpost(@Validated Member3 m, Model model, BindingResult result) {
+    public String registerpost(@Validated Member3 m, BindingResult result) {
         log.info(m.toString());
-        log.info(result);
+        log.error(result);
+        log.error(result.hasErrors());
+        log.error(result.hasGlobalErrors());
+        log.error(result.hasFieldErrors());
 
         return "success";
     }
@@ -327,11 +424,6 @@ public class TestController {
         return "result";
     }
 
-    @GetMapping("/register02")
-    public String register02(Member member) {
-        log.info(member.toString());
-        return "success";
-    }
 
     @PostMapping("/register03")
     public String register03(int uid, Member member) {
@@ -348,45 +440,6 @@ public class TestController {
         return "success";
     }
 
-    @GetMapping("/registerAllForm")
-    public String registerAllForm() {
-        return "registerAllForm";
-    }
 
-    @PostMapping("/registerUser")
-    public String registerUser(Member member) {
-        log.info(member.toString());
-        return "success";
-    }
 
-    @PostMapping("/registerFile01")
-    public String registerFile01(MultipartFile picture) {
-        log.info("oriName : " + picture.getOriginalFilename());
-        return "success";
-    }
-
-    @PostMapping("/uploadAjax")
-    public ResponseEntity<String> uploadAjax(MultipartFile picture) {
-        log.info(picture.getOriginalFilename());
-        return new ResponseEntity<String>("UploadOK : " + picture.getOriginalFilename(), HttpStatus.OK);
-    }
-
-    @GetMapping("/read01")
-    public String read01(Model model) {
-        model.addAttribute("userId", "test");
-        model.addAttribute("password", "123");
-        model.addAttribute("userName", "userName");
-        model.addAttribute("email", "email");
-        return "read01";
-    }
-
-    @GetMapping("/read02")
-    public String read02(Model model) {
-        Member22 m = new Member22();
-        m.setUserId("test");
-        m.setPassword("123");
-
-        model.addAttribute("member", m);
-        return "read02";
-    }
 }

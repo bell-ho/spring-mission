@@ -10,7 +10,8 @@
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<form action="/registerUser" , method="post">
+
+<form action="/25/registerUser" , method="post">
     userId : <input type="text" name="userId" value="user"><br>
     password : <input type="text" name="password" value="password"><br>
     username : <input type="text" name="userName" value="username"><br>
@@ -83,63 +84,6 @@
     <button type="reset">리셋</button>
 </form>
 
-
-<form action="/registerFile01" method="post" enctype="multipart/form-data">
-    picture : <input type="file" name="picture">
-    <button type="submit">전송</button>
-</form>
-
-<button id="registerBtn01">get전송</button>
-<button id="registerBtn02">post전송</button>
-<br>
-
-<form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="uploadImage" name="picture">
-</form>
-
-<script>
-    $(document).on("change", "#uploadImage", function () {
-        const imageInput = $("#uploadImage")[0];
-
-        const formData = new FormData();
-        formData.append("picture", imageInput.files[0]);
-
-        $.ajax({
-            type: "post",
-            url: "/uploadAjax",
-            processData: false, //processData 관련하여, 일반적으로 서버에 전달되는 데이터는 query string 이라는 형태로 전달된다.
-            contentType: false, //contentType 은 default 값이 "application/x-www-form-urlencoded; charset=UTF-8" 인데, "multipart/form-data" 로 전송이 되게 false 로 넣어준다.
-            data: formData,
-        })
-    });
-    $(document).on("click", "#registerBtn01", function () {
-        $.ajax(
-            {
-                type: "get",
-                url: "/register/test",
-                headers: {
-                    // 'Accept': 'application/json',
-                    // 'Content-Type': 'application/xml; charset=utf-8'
-                },
-            }
-        )
-    });
-    $(document).on("click", "#registerBtn02", function () {
-        $.ajax(
-            {
-                type: "post",
-                url: "/register02",
-                data: {
-                    userId: "test",
-                    password: "12"
-                },
-                headers: {
-                    // 'Accept': 'application/json',
-                    // 'Content-Type': 'application/xml; charset=utf-8'
-                },
-            }
-        )
-    });
 </script>
 </body>
 </html>

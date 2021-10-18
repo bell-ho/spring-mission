@@ -13,7 +13,7 @@
 
 user : ${member.userId}<br>
 password : ${member.password}<br>
-userName : ${member.userName}<br>
+username : ${member.username}<br>
 email : ${member.email}
 </body>
 </html>
