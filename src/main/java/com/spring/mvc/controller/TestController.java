@@ -412,13 +412,13 @@ public class TestController {
     // 33
     @GetMapping("/33/registerForm01")
     public String registerForm01m1(Model model) {
-        model.addAttribute("member", new Member33("userId","pass","un"));
+        model.addAttribute("member", new Member33());
         return "/33/registerForm";
     }
 
     @PostMapping("/33/register")
-    public String registerForm01m2(@Validated @ModelAttribute("member") Member33 member33 , BindingResult result) {
-        log.info(member33.toString());
+    public String registerForm01m2(@ModelAttribute("member") @Validated Member33 member , BindingResult result) {
+        log.info(member.toString());
         log.info(result);
         return "/33/success";
     }

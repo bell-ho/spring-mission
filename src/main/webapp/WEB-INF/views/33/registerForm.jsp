@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,22 +13,34 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <h1>등록</h1>
 
-
-<form action="/33/register" method="post" modelattribute="member">
-    유저 ID : <input type="text" name="userId" value="${member.userId}"><br>
-    패스워드 : <input type="text" name="password" value="${member.password}"><br>
-    이름 : <input type="text" name="username" value="${member.username}"><br>
-    Email : <input type="text" name="email" value=""><br>
-    birthDay : <input type="text" name="birthDay" value=""><br>
-
-    성별 <br>
-    <input type="radio" name="gender" value="male"> male
-    <input type="radio" name="gender" value="Female"> Female
-    <br>
-
-    <button type="submit">전송</button>
-</form>
-
-
+<form:form modelAttribute="member" method="post" action="/33/register">
+    <table>
+        <tr>
+            <td>유저ID</td>
+            <td><form:input path="userId" /><font color="red"><form:errors path="userId" /></font></td>
+        </tr>
+        <tr>
+            <td>패스워드</td>
+            <td><form:password path="password" /><font color="red"><form:errors path="password" /></font></td>
+        </tr>
+        <tr>
+            <td>이름</td>
+            <td><form:input path="username" /><font color="red"><form:errors path="username" /></font></td>
+        </tr>
+        <tr>
+            <td>성별</td>
+            <td>
+                <form:radiobutton path="gender" value="male" label="Male" /> <br>
+                <form:radiobutton path="gender" value="female" label="Female" /> <br>
+                <form:radiobutton path="gender" value="other" label="Other" />
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td align="center"><input type="submit" name="btnSubmit" value="등록"></td>
+        </tr>
+    </table>
+</form:form>
 </body>
 </html>
